@@ -9,7 +9,7 @@
             <div th:each = "answerScore : ${q.answerScores}">
                 <label>
                     <input type="radio" th:name="${q.id}" th:value="${answerScore.key}">
-                    <span th:text="${answerScore.key.description}"></span>
+                    <span th:text="${answerScore.key}"></span>
                 </label>
             </div>
 

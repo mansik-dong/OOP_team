@@ -1,6 +1,5 @@
 package hello.egen_teto.controller;
 
-import hello.egen_teto.domain.Answer;
 import hello.egen_teto.service.EgenTetoService;
 import hello.egen_teto.domain.Tester;
 import org.springframework.beans.factory.annotation.Autowired;
