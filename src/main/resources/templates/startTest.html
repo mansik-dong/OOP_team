@@ -4,12 +4,12 @@
 <div class="container">
     <form action="/new/consequence" method="post" th:object="${questions}">
         <div th:each="q : ${questions}">
-            <p th:text="${q.text}"></p>
+            <p th:text="${q.questionText}"></p>
 
-            <div th:each = "answerScore : ${q.answerScores}">
+            <div th:each = "answer : ${q.answerList}">
                 <label>
-                    <input type="radio" th:name="${q.id}" th:value="${answerScore.key}">
-                    <span th:text="${answerScore.key}"></span>
+                    <input type="radio" th:name="${q.id}" th:value="${answer.answerText}">
+                    <span th:text="${answer.answerText}"></span>
                 </label>
             </div>
 

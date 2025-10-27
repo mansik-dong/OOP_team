@@ -4,6 +4,11 @@
 <body>
     <p>에겐력: <span th:text="${egen}"></span></p>
     <p>테토력: <span th:text="${teto}"></span></p>
+    <p th:text="${consequenceText}"> </p>
+
+    <form action="/new" method="get">
+        <button type="submit">다시 테스트하기</button>
+    </form>
 <body>
 
 </html>
