@@ -2,81 +2,98 @@ package hello.egen_teto.service;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import hello.egen_teto.domain.Category;
-import hello.egen_teto.domain.Question;
-import hello.egen_teto.domain.Tester;
+import hello.egen_teto.domain.*;
+import hello.egen_teto.dto.ResultDtO;
+import hello.egen_teto.repository.AnswerRepository;
+import hello.egen_teto.repository.QuestionRepository;
+import hello.egen_teto.repository.TestResultRepository;
+import jakarta.annotation.PostConstruct;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.io.InputStream;
+import java.time.LocalDateTime;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
 @Service
 public class EgenTetoService {
-    private List<Question> questionList;
-    private Tester tester;
-    private int egen = 0;
-    private int teto = 0;
 
-    public Integer getEgen() {
-        return egen;
+    private final QuestionRepository questionRepository;
+    private final AnswerRepository answerRepository;
+    private final TestResultRepository testResultRepository;
+
+    @Autowired
+    public EgenTetoService(QuestionRepository questionRepository, AnswerRepository answerRepository, TestResultRepository testResultRepository) {
+        this.questionRepository = questionRepository;
+        this.answerRepository = answerRepository;
+        this.testResultRepository = testResultRepository;
     }
 
-    public Integer getTeto() {
-        return teto;
-    }
-
-    public void calculateScore(Map<String, String> idAnswers) {
-        for (Map.Entry<String, String> e : idAnswers.entrySet()) {
-            Question question = questionList.stream().filter(m -> m.getId().equals(e.getKey())).findAny()
-                    .orElseThrow(() -> new RuntimeException("폼으로 받은 id와 일치하는 question 없음"));
-            Map<Category, Integer> categoryScores = question.getAnswerList().stream().filter(m -> m.getAnswerText().equals(e.getValue())).findAny()
-                    .orElseThrow(() -> new RuntimeException("폼으로 받은 answerText 와 일치하는 Answer 없음")).getScores();
-            this.egen += categoryScores.getOrDefault(Category.EGEN, 0);
-            this.teto += categoryScores.getOrDefault(Category.TETO, 0);
+    @Transactional
+    @PostConstruct
+    public void listToDatabase() {
+        if (questionRepository.count() > 0 ) {
+            return;
         }
+
+        List<Question> questionList = jsonToList();
+        for (Question q : questionList) {
+            for (Answer a : q.getAnswerList()) {
+                a.setQuestion(q);
+            }
+        }
+        questionRepository.saveAll(questionList);
     }
 
-    public String getConsequenceText() {
+    @Transactional
+    public ResultDtO saveAndCalculateScore(Map<Long, Long> myAnswers, Tester tester) {
+        List<Answer> answerList = answerRepository.findAllById(myAnswers.values());
+
+        int egen = 0;
+        int teto = 0;
+
+        for (Answer answer : answerList) {
+            Map<Category, Integer> score = answer.getScore();
+            egen += score.getOrDefault(Category.EGEN, 0);
+            teto += score.getOrDefault(Category.TETO, 0);
+        }
+
+        LocalDateTime time = LocalDateTime.now();
+
+        Result result = new Result(tester.getName(), tester.getGender(), egen, teto, time);
+        testResultRepository.save(result);
+
+        String resultText = getResultText(tester, egen, teto);
+
+        return new ResultDtO(egen, teto, resultText);
+    }
+
+    public String getResultText(Tester tester, int egen, int teto) {
         if (egen > teto) {
-            if (tester.getGender() == Tester.Gender.MALE) {
-                return tester.getName() + "님은 에겐남 이시네요";
-            } else {
-                return tester.getName() + "님은 에겐녀 이시네요";
-            }
+            return tester.getName() + "님은 " + (tester.getGender() == Tester.Gender.MALE ? "에겐남" : "에겐녀") + " 이시네요";
         } else if (egen < teto) {
-            if (tester.getGender() == Tester.Gender.MALE) {
-                return tester.getName() + "님은 테토남 이시네요";
-            } else {
-                return tester.getName() + "님은 테토녀 이시네요";
-            }
+            return tester.getName() + "님은 " + (tester.getGender() == Tester.Gender.MALE ? "테토남" : "테토녀") + " 이시네요";
         } else {
             return tester.getName() + "님은 반반 이시네요";
         }
     }
 
-    private void jsonToList() {
+    private List<Question> jsonToList() {
         try {
             ObjectMapper mapper = new ObjectMapper();
             InputStream is = getClass().getResourceAsStream("/questions.json");
-            this.questionList = mapper.readValue(is, new TypeReference<List<Question>>() {});
+            return mapper.readValue(is, new TypeReference<List<Question>>() {});
         } catch (Exception e) {
             e.printStackTrace();
+            return Collections.emptyList();
         }
     }
 
-    public void clearScore() {
-        this.egen = 0;
-        this.teto = 0;
-    }
-
+    @Transactional(readOnly = true)
     public List<Question> getQuestionList() {
-        jsonToList();
-        return this.questionList;
+        return questionRepository.findAll();
     }
-
-    public void setTester(Tester tester) {
-        this.tester = tester;
-    }
-
 }

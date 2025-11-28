@@ -1,20 +1,30 @@
 package hello.egen_teto.domain;
 
+import jakarta.persistence.*;
 import java.util.List;
 
+@Entity
 public class Question {
-    private String id;
-    private String questionText;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @OneToMany(mappedBy = "question", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Answer> answerList;
 
-    public Question() {}
 
-    public String getId() {
+    private String questionText;
+
+    public Long getId() {
         return id;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public List<Answer> getAnswerList() {
+        return answerList;
+    }
+
+    public void setAnswerList(List<Answer> answerList) {
+        this.answerList = answerList;
     }
 
     public String getQuestionText() {
@@ -25,12 +35,7 @@ public class Question {
         this.questionText = questionText;
     }
 
-    public List<Answer> getAnswerList() {
-        return answerList;
-    }
+    public Question() {}
 
-    public void setAnswerList(List<Answer> answerList) {
-        this.answerList = answerList;
-    }
 }
 

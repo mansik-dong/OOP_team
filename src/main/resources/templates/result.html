@@ -2,9 +2,9 @@
 <html xmlns:th="http://www.thymeleaf.org">
 
 <body>
-    <p>에겐력: <span th:text="${egen}"></span></p>
-    <p>테토력: <span th:text="${teto}"></span></p>
-    <p th:text="${consequenceText}"> </p>
+    <p>에겐력: <span th:text="${result.egen}"></span></p>
+    <p>테토력: <span th:text="${result.teto}"></span></p>
+    <p th:text="${result.resultText}"> </p>
 
     <form action="/new" method="get">
         <button type="submit">다시 테스트하기</button>

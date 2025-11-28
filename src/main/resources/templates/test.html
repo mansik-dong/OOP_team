@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+<div class="container">
+    <span th:text="${pageNumber}"></span>
+    <form th.action="@{/new/test/__${pageNumber}__}" method="post">
+        <span th:text="${question.questionText}"></span>
+
+        <input type="hidden" name="questionId" th:value="${question.id}">
+
+        <div th:each="answer : ${question.answerList}">
+            <label>
+                <input type="radio" name="answerId" th:value="${answer.id}">
+                <span th:text="${answer.answerText}"></span>
+            </label>
+        </div>
+
+        <button type="submit">다음</button>
+    </form>
+</div>
+</body>
