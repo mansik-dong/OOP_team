@@ -1,14 +1,22 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>설문지 결과</title>
 
+    <link rel="stylesheet" href="/css/style.css">
+</head>
 <body>
-    <p>에겐력: <span th:text="${result.egen}"></span></p>
-    <p>테토력: <span th:text="${result.teto}"></span></p>
-    <p th:text="${result.resultText}"> </p>
+    <div class="container">
+        <p>에겐력: <span th:text="${result.egen}"></span></p>
+        <p>테토력: <span th:text="${result.teto}"></span></p>
+        <p th:text="${result.resultText}"> </p>
 
-    <form action="/new" method="get">
-        <button type="submit">다시 테스트하기</button>
-    </form>
-<body>
+        <form action="/new" method="get">
+            <button type="submit">다시 테스트하기</button>
+        </form>
+    </div>
+</body>
 
 </html>
