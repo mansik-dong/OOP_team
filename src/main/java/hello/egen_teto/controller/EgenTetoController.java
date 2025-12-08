@@ -1,8 +1,8 @@
 package hello.egen_teto.controller;
 
 import hello.egen_teto.domain.Question;
-import hello.egen_teto.dto.ResultDtO;
 import hello.egen_teto.domain.Tester;
+import hello.egen_teto.dto.ResultDto;
 import hello.egen_teto.service.EgenTetoService;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -74,7 +74,7 @@ public class EgenTetoController {
     public String consequence(Model model, HttpSession session) {
         Map<Long, Long> myAnswers = (Map<Long, Long>) session.getAttribute("myAnswers");
         Tester tester = (Tester) session.getAttribute("tester");
-        ResultDtO result = egenTetoService.saveAndCalculateScore(myAnswers, tester);
+        ResultDto result = egenTetoService.saveAndCalculateScore(myAnswers, tester);
 
         model.addAttribute("tester",  tester);
         model.addAttribute("result", result);

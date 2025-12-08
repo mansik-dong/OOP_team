@@ -3,10 +3,10 @@ package hello.egen_teto.service;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import hello.egen_teto.domain.*;
-import hello.egen_teto.dto.ResultDtO;
+import hello.egen_teto.dto.ResultDto;
 import hello.egen_teto.repository.AnswerRepository;
 import hello.egen_teto.repository.QuestionRepository;
-import hello.egen_teto.repository.TestResultRepository;
+import hello.egen_teto.repository.ResultRepository;
 import jakarta.annotation.PostConstruct;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,13 +23,13 @@ public class EgenTetoService {
 
     private final QuestionRepository questionRepository;
     private final AnswerRepository answerRepository;
-    private final TestResultRepository testResultRepository;
+    private final ResultRepository ResultRepository;
 
     @Autowired
-    public EgenTetoService(QuestionRepository questionRepository, AnswerRepository answerRepository, TestResultRepository testResultRepository) {
+    public EgenTetoService(QuestionRepository questionRepository, AnswerRepository answerRepository, ResultRepository ResultRepository) {
         this.questionRepository = questionRepository;
         this.answerRepository = answerRepository;
-        this.testResultRepository = testResultRepository;
+        this.ResultRepository = ResultRepository;
     }
 
     @Transactional
@@ -49,7 +49,7 @@ public class EgenTetoService {
     }
 
     @Transactional
-    public ResultDtO saveAndCalculateScore(Map<Long, Long> myAnswers, Tester tester) {
+    public ResultDto saveAndCalculateScore(Map<Long, Long> myAnswers, Tester tester) {
         List<Answer> answerList = answerRepository.findAllById(myAnswers.values());
 
         int egen = 0;
@@ -64,11 +64,11 @@ public class EgenTetoService {
         LocalDateTime time = LocalDateTime.now();
 
         Result result = new Result(tester.getName(), tester.getGender(), egen, teto, time);
-        testResultRepository.save(result);
+        ResultRepository.save(result);
 
         String resultText = getResultText(tester, egen, teto);
 
-        return new ResultDtO(egen, teto, resultText);
+        return new ResultDto(egen, teto, resultText);
     }
 
     public String getResultText(Tester tester, int egen, int teto) {
