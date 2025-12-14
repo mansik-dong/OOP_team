@@ -5,7 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>테스터 정보 입력</title>
 
-    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/global.css">
+    <link rel="stylesheet" href="/css/new.css">
 </head>
 <body>
 <div class="container">
@@ -16,14 +17,18 @@
 
 
     <p>성별을 입력하세요</p>
-    <label>
-      <input type = "radio" name="gender" value="MALE"> 남자
-    </label>
-    <label>
-      <input type = "radio" name="gender" value="FEMALE"> 여자
-    </label>
-    <button type="submit">제출하기</button>
+      <div>
+          <label class="gender male">
+            <input type = "radio" name="gender" value="MALE">
+            남자
+          </label>
 
+          <label class = "gender female">
+            <input type = "radio" name="gender" value="FEMALE">
+            여자
+          </label>
+      </div>
+    <button type="submit" id="submit-button">제출하기</button>
   </form>
 </div>
 </body>

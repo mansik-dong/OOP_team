@@ -73,11 +73,11 @@ public class EgenTetoService {
 
     public String getResultText(Tester tester, int egen, int teto) {
         if (egen > teto) {
-            return tester.getName() + "님은 " + (tester.getGender() == Tester.Gender.MALE ? "에겐남" : "에겐녀") + " 이시네요";
+            return tester.getName() + "님은 " + (tester.getGender() == Tester.Gender.MALE ? "에겐남" : "에겐녀") + " 입니다";
         } else if (egen < teto) {
-            return tester.getName() + "님은 " + (tester.getGender() == Tester.Gender.MALE ? "테토남" : "테토녀") + " 이시네요";
+            return tester.getName() + "님은 " + (tester.getGender() == Tester.Gender.MALE ? "테토남" : "테토녀") + " 입니다";
         } else {
-            return tester.getName() + "님은 반반 이시네요";
+            return tester.getName() + "님은 반반 입니다";
         }
     }
 

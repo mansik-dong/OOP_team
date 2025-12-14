@@ -1,6 +1,6 @@
 [
   {
-    "questionText": "게임에서 졌을 때",
+    "questionText": "연인 or 친구와 게임 중인 나... 내가 졌을 때 나의 반응은??",
     "answerList": [
       {
         "answerText": "재밌었으니 됐다",
@@ -13,7 +13,7 @@
     ]
   },
   {
-    "questionText": "평소 대화할 때",
+    "questionText": "평소 사람들과 대화할 때 나의 반응은?",
     "answerList": [
       {
         "answerText": "분위기 맞추며 리액션하는 편",
@@ -26,7 +26,7 @@
     ]
   },
   {
-    "questionText": "소개팅 할 때",
+    "questionText": "지인을 통해 소개팅에 나가게 된 나... 내가 선호하는 타입은?",
     "answerList": [
       {
         "answerText": "리드 당하는 걸 좋아함",
@@ -39,7 +39,7 @@
     ]
   },
   {
-    "questionText": "쉬는 날",
+    "questionText": "오랜만에 느긋하게 쉬게 된 상황, 이럴 때 주로 나는 어디서 쉬는지?",
     "answerList": [
       {
         "answerText": "실내 위주(집, 카페 등)",
@@ -52,7 +52,7 @@
     ]
   },
   {
-    "questionText": "혼자 집에서 밥먹을 때",
+    "questionText": "집에서 혼자 밥을 먹어야 하는 상황... 이럴 때 나는 어떻게 끼니를 때우는지?",
     "answerList": [
       {
         "answerText": "10번 중 4번 이상 요리해서 먹음",
@@ -65,7 +65,7 @@
     ]
   },
   {
-    "questionText": "친구 만날 때",
+    "questionText": "귀찮지만 선약을 했기에 친구와 만나야 하는 상황, 이럴 때 나는?",
     "answerList": [
       {
         "answerText": "눈썹, 립밤은 필수",
@@ -78,7 +78,7 @@
     ]
   },
   {
-    "questionText": "데이트 할 때",
+    "questionText": "데이트 겸 저녁 약속을 잡은 상황... 나의 반응에 더 맞는 것은?",
     "answerList": [
       {
         "answerText": "맛집 검색해서 가보고 맛있으면 저장",
@@ -91,7 +91,7 @@
     ]
   },
   {
-    "questionText": "가려던 맛집 웨이팅 있을 때(30분 이상)",
+    "questionText": "가려던 맛집에 웨이팅이 있다...(30분 이상) 이럴 때 보통 나는?",
     "answerList": [
       {
         "answerText": "10번 중 6번은 기다린 적 있음",
@@ -104,7 +104,7 @@
     ]
   },
   {
-    "questionText": "싸움 났을 때",
+    "questionText": "상대와 의견 충돌로 분위기가 안 좋아졌다... 이럴 때 나는 보통?",
     "answerList": [
       {
         "answerText": "웬만하면 화해 시도함",
@@ -117,7 +117,7 @@
     ]
   },
   {
-    "questionText": "연락 빈도",
+    "questionText": "연락 빈도에 대해 대화를 나누게 된 상황, 이때 나의 입장은?",
     "answerList": [
       {
         "answerText": "연락 자주 하고 소통 유지형",

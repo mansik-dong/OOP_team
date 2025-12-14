@@ -1,0 +1,110 @@
+body::after {
+    content: "에겐테토테스트";
+
+    position: fixed;
+    top: 5px;
+    left: 5px;
+    z-index: 999;
+
+    font-size: 1.4rem;
+    font-weight: normal;
+    color: #FF8C00;
+
+    text-shadow:
+        1px 1px 0 white,
+        -1px -1px 0 white,
+        1px -1px 0 white,
+        -1px 1px 0 white;
+}
+
+label[for="name"] {
+    margin-top: 40px;
+    margin-bottom: 20px;
+
+    font-size: 1.3rem;
+    font-weight: normal;
+    color: white;
+
+    text-shadow:
+        -1px -1px 0 #000,
+        1px -1px 0 #000,
+        -1px 1px 0 #000,
+        1px 1px 0 #000;
+}
+
+#name {
+    width: 200px;
+    padding: 6px 20px;
+
+    font-size: 1.0rem;
+    font-weight: normal;
+    text-align: center;
+    color: black;
+
+    background-color: #a0a0a0;
+    border: none;
+    border-radius: 30px;
+    outline: none;
+}
+
+#name::placeholder {
+    color: #444;
+}
+
+p {
+    margin-top: 40px;
+    margin-bottom: 20px;
+
+    font-size: 1.3rem;
+    font-weight: normal;
+    color: white;
+
+    text-shadow:
+        -1px -1px 0 #000,
+        1px -1px 0 #000,
+        -1px 1px 0 #000,
+        1px 1px 0 #000;
+}
+
+label.gender {
+    display: inline-block;
+    padding: 4px 14px;
+    margin: 10px;
+
+    font-size: 1rem;
+    font-weight: normal;
+    color: white;
+
+    border-radius: 25px;
+    box-shadow: 3px 3px 0 rgba(0,0,0,0.2);
+
+    cursor: pointer;
+}
+
+label.male {
+    background-color: #0056b3;
+}
+
+label.female {
+    background-color: #ff69b4;
+}
+
+button[type="submit"] {
+    padding: 8px 30px;
+    margin-top: 50px;
+
+    font-size: 16px;
+    font-weight: normal;
+    color: #333;
+
+    background-color: white;
+    border: 1px solid black;
+    border-radius: 5px;
+
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+button[type="submit"]:hover {
+    background-color: #f0f0f0;
+}
